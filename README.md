@@ -1,5 +1,7 @@
 # Engineering portfolio — Ilya
 
+[**Russian version → engineering-showcase**](https://github.com/Ilyusa206/engineering-showcase)
+
 I work as a systems administrator and build application software across backend, web, mobile, and operations. My work includes data and authorization models, realtime workflows, deployment, networking, storage, backup, and recovery. I consider **Full-stack**, **Backend**, **DevOps / Platform**, and **System / Infrastructure** roles separately; each calls for a different part of this portfolio.
 
 ## Run something first
@@ -35,5 +37,3 @@ Each case states my contribution, project maturity, engineering decisions, publi
 ## Why the examples are reconstructed
 
 The source applications and infrastructure records are private. Public examples preserve implemented engineering patterns in a new domain, with identities, endpoints, topology, business logic and data removed. They are clearly marked **sanitized reconstructions**, never presented as verbatim production code. See the [publication policy](SECURITY.md), [source map](SOURCE-MAP.md), [evidence by technology](STACK.md) and [background](ABOUT.md).
-
-[**Russian version → engineering-showcase**](https://github.com/Ilyusa206/engineering-showcase)

@@ -1,6 +1,6 @@
 # Public artifacts and source traceability
 
-Private repositories are the factual sources, not dependencies needed to inspect this portfolio. The public artifacts stand on their own and omit operationally sensitive details.
+This English adaptation uses [the Russian evidence baseline at `669e253a0f94c912dbd30fa8e565c001b31e06eb`](https://github.com/Ilyusa206/engineering-showcase/tree/669e253a0f94c912dbd30fa8e565c001b31e06eb). Private repositories are the factual sources, not dependencies needed to inspect this portfolio. The public artifacts stand on their own and omit operationally sensitive details.
 
 | Public artifact | Implemented pattern | Canonical private source | Publication boundary |
 |---|---|---|---|
