@@ -1,0 +1,57 @@
+name: Verify engineering showcase
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    name: Links, structure, TypeScript and security
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    services:
+      postgres:
+        image: postgres:17-alpine
+        env:
+          POSTGRES_DB: showcase
+          POSTGRES_USER: showcase
+          POSTGRES_PASSWORD: showcase
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd "pg_isready -U showcase -d showcase"
+          --health-interval 5s
+          --health-timeout 5s
+          --health-retries 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: npm run verify
+      - name: Install reference service
+        working-directory: examples/reference-service
+        run: npm ci --no-fund
+      - name: Audit production dependencies
+        working-directory: examples/reference-service
+        run: npm audit --omit=dev --audit-level=high
+      - name: Typecheck and build reference service
+        working-directory: examples/reference-service
+        run: npm run typecheck && npm run build
+      - name: Apply migrations
+        working-directory: examples/reference-service
+        env:
+          DATABASE_URL: postgresql://showcase:showcase@127.0.0.1:5432/showcase
+        run: npm run migrate && npm run migrate
+      - name: Run PostgreSQL integration tests
+        working-directory: examples/reference-service
+        env:
+          DATABASE_URL: postgresql://showcase:showcase@127.0.0.1:5432/showcase
+        run: npm test
+      - name: Validate Docker Compose
+        working-directory: examples/reference-service
+        run: docker compose config --quiet
